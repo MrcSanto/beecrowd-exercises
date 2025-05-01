@@ -1,23 +1,30 @@
 #include <iostream>
-#include <string>
-
-std::string remove_char(std::string &str, char &d){
-    std::string ret = "";
-    for (char c: str){
-        if (d != c) ret += c;
-    }
-    return ret;
-}
 
 int main(){
-    char d;
-    std::string n;
-    while(std::cin >> d >> n){
-        std::string str_res = remove_char(n, d);
-        if (str_res.empty()) continue;
+    std::size_t p = 0;
+    char D;
+    std::string N, R;
 
-        std::cout << std::stoi(remove_char(n, d)) << std::endl;
-    };
+    while (std::cin >> D >> N){
+        if (D == '0' && N == "0") break;
+
+        R = "";
+        for (std::size_t i=0;i<N.length();i++){
+            if (N[i] != D) R += N[i];
+        }
+
+        p = 0;
+        while(p < R.length()){
+            if (R[p] != '0') break;
+            ++p;
+        }
+
+        if (p == R.length()) std::cout << 0 << std::endl;
+        else {
+            R = R.substr(p);
+            std::cout << R << std::endl;
+        }
+    }
 
     return 0;
 }
